@@ -36,3 +36,7 @@ Route::get('home/product/productSearch' , 'App\Http\Controllers\ProductControlle
 // get feedbacks
 Route::get('home/product/feedback' , 'App\Http\Controllers\FeedBackController@getFeedBacks');
 Route::post('home/product/addFeedBack' , 'App\Http\Controllers\FeedBackController@addFeedBack');
+// get cart items
+Route::get('home/product/cart' , 'App\Http\Controllers\CartItemController@getCart');
+Route::post('home/product/addToCart' , 'App\Http\Controllers\CartItemController@addToCart');
+Route::post('home/product/deleteFromCart' , 'App\Http\Controllers\CartItemController@deleteFromCart');
