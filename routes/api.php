@@ -22,6 +22,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('users/create' , 'App\Http\Controllers\UserController@create');
 Route::post('users/uploadImage' , 'App\Http\Controllers\UserController@uploadImage');
 Route::post('users/login' , 'App\Http\Controllers\UserController@login');
+Route::get('users/userData' , 'App\Http\Controllers\UserController@getUserData');
+Route::post('users/updateUserData' , 'App\Http\Controllers\UserController@updateUserData');
 
 Route::get('home/category/categories' , 'App\Http\Controllers\CategoryController@getCategories');
 
@@ -40,3 +42,11 @@ Route::post('home/product/addFeedBack' , 'App\Http\Controllers\FeedBackControlle
 Route::get('home/product/cart' , 'App\Http\Controllers\CartItemController@getCart');
 Route::post('home/product/addToCart' , 'App\Http\Controllers\CartItemController@addToCart');
 Route::post('home/product/deleteFromCart' , 'App\Http\Controllers\CartItemController@deleteFromCart');
+// orders
+Route::get('home/order/allOrders' , 'App\Http\Controllers\OrderController@getOrders');
+Route::post('home/order/addOrder' , 'App\Http\Controllers\OrderController@addOrder');
+Route::get('home/order/getOrdersHistory' , 'App\Http\Controllers\OrderController@getOrdersHistory');
+
+// orderProducts
+Route::get('home/order/orderDetails' , 'App\Http\Controllers\OrderProductController@getOrders');
+

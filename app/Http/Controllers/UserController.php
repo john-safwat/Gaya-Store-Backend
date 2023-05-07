@@ -133,4 +133,51 @@ class UserController extends Controller
         ],200);
     }
 
+    public function getUserData(Request $request){
+        $user= User::where('token', '=' , $request['token'])->get();
+        if($user[0]->image !== null){
+            $user[0]->image =  "http://192.168.1.9/Gaya-Store/public/images/UserImages/".$user[0]->image;
+        }
+        return response()->json([
+            'statusCode' => 200,
+            "message" => "Data Retrieved Successfully",
+            "user" => $user[0]
+        ]);
+    }
+
+
+    public function updateUserData(Request $request){
+        if($request->password == null){
+            User::where('token' , '=' , $request->token)->update([
+                'name' => $request->name ,
+                'phone' => $request->phone,
+                'birthDate' => $request->birthDate,
+            ]);
+
+            $user = User::where('token' , '=' , $request->token)->get();
+            return response()->json([
+                'statusCode' => 200,
+                'message' => 'data not the password updated successfully',
+                'user' => $user[0],
+            ]);
+
+        }else {
+            User::where('token' , '=' , $request->token)->update([
+                'name' => $request->name ,
+                'password' => Hash::make($request->password),
+                'phone' => $request->phone,
+                'birthDate' => $request->birthDate,
+            ]);
+            $user = User::where('token' , '=' , $request->token)->get();
+
+
+            return response()->json([
+                'statusCode' => 200,
+                'message' => 'data updated successfully',
+                'user' => $user[0],
+            ]);
+        }
+
+
+    }
 }

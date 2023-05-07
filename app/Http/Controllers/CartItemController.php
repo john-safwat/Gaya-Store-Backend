@@ -32,6 +32,7 @@ class CartItemController extends Controller
                 "cartItem" => $cart
             ], 200);
         }else {
+            $cartItem[0]->productId =  $request->productId;
             return response()->json([
                 'code' => 409,
                 'message' => 'Product is Already in Your Cart',
@@ -50,10 +51,11 @@ class CartItemController extends Controller
             return response()->json([
                 'code' => 404,
                 'message' => 'Product is not in the cart',
-                "cartItem" => $cartItem
+                "cartItem" => null
             ], 404);
         }else {
             $cartItem[0]->delete();
+            $cartItem[0]->productId = $request->productId;
             return response()->json([
                 'code' => 200,
                 'message' => 'Product Removed Successfully',
